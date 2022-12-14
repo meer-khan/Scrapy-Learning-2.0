@@ -10,3 +10,9 @@ class AmazonSpiderSpider(scrapy.Spider):
     def parse(self, response):
         items = AmazontutorialItem()
         
+        items["productName"] = response.css(".a-size-medium.a-color-base.a-text-normal::text").get()
+        items["productAuthor"] = response.css(".a-size-base.a-color-secondary::text").get()
+        items["productPrice"] = response.css(".a-price-whole::text").get()
+        items["productImageLink"] = response.css(".s-image::attr(src)").get()
+
+        yield items
