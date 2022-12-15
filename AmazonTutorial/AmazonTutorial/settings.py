@@ -15,7 +15,10 @@ NEWSPIDER_MODULE = 'AmazonTutorial.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'AmazonTutorial (+http://www.yourdomain.com)'
-USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+
+# USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+
+# USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
  
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -58,7 +61,8 @@ ROBOTSTXT_OBEY = False
 #}
 
 # SPLASH_SETUP
-SPLASH_URL = 'http://192.168.59.103:8050'
+SPLASH_URL = 'http://192.168.59.103:8000'
+# SPLASH_URL = 'http://localhost:8050'
 
 
 

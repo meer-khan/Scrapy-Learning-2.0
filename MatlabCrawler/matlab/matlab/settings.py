@@ -16,28 +16,13 @@ NEWSPIDER_MODULE = 'matlab.spiders'
 
 
 
-# SPLASH SETUP 
 
-SPLASH_URL = 'http://localhost:8050'
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-}
-
-SPIDER_MIDDLEWARES = {
-    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
-}
-
-
-
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
-
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'matlab (+http://www.yourdomain.com)'
+# USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
+USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -55,6 +40,30 @@ ROBOTSTXT_OBEY = False
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
+
+
+
+
+# SPLASH SETUP 
+
+# SPLASH_URL = 'http://localhost:8050'
+SPLASH_URL = 'http://192.168.59.103:8050'
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+
+SPIDER_MIDDLEWARES = {
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
+
+
+
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False

@@ -12,7 +12,7 @@ function main(splash, args)
     assert(splash:wait(1))
     splash:set_viewport_full()
     local email_input = splash:select('input[name=email]')   
-    email_input:send_text("shahmirkhan519@gmail.com")
+    email_input:send_text("03316442212")
     assert(splash:wait(1))
     local email_submit = splash:select('input[id=continue]')
     email_submit:click()
@@ -33,7 +33,7 @@ function main(splash, args)
 """
 
 class HeadlessBrowserLoginSpider(scrapy.Spider):
-    name = "amazon_login"
+    name = "amazon_login2"
 
     def start_requests(self):
         signin_url = 'https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_custrec_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&'
@@ -60,3 +60,19 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
             yield scrapy.Request(url=url, cookies=cookies_dict, callback=self.parse)
 
 
+    def parse(self, response):
+        # save the full page html
+        with open('response.html', 'wb') as f:
+            f.write(response.body)
+
+        # scraping all the links on the page
+        page_urls = response.css('a')
+        for page_url in page_urls:
+            if(page_url.css('a::text').get() is not None):
+                try:
+                    yield {
+                        'url_text' : page_url.css('a::text').get(),
+                        'url' : page_url.css('a').attrib['href']
+                    }
+                except:
+                    print("An error occurred when scraping a link")
