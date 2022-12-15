@@ -1,5 +1,7 @@
 import scrapy
 from ..items import AmazontutorialItem
+from scrapy_splash import SplashRequest
+import base64
 
 class AmazonSpiderSpider(scrapy.Spider):
     name = 'amazon_spider'

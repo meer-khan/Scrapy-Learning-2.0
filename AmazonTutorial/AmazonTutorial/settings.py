@@ -15,7 +15,7 @@ NEWSPIDER_MODULE = 'AmazonTutorial.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'AmazonTutorial (+http://www.yourdomain.com)'
-# USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
  
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -58,7 +58,7 @@ ROBOTSTXT_OBEY = False
 #}
 
 # SPLASH_SETUP
-SPLASH_URL = 'http://localhost:8050'
+SPLASH_URL = 'http://192.168.59.103:8050'
 
 
 
@@ -72,8 +72,8 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy_splash.SplashMiddleware': 725,
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+    # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    # 'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
 
     #  'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
     # 'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
