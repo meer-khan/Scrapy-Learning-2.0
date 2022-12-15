@@ -3,6 +3,35 @@ from scrapy_splash import SplashRequest
 import base64
 
 
+
+
+lua_script = """
+function main(splash, args)
+    splash:init_cookies(splash.args.cookies)
+    assert(splash:go(args.url))
+    assert(splash:wait(1))
+    splash:set_viewport_full()
+    local email_input = splash:select('input[name=email]')   
+    email_input:send_text("shahmirkhan519@gmail.com")
+    assert(splash:wait(1))
+    local email_submit = splash:select('input[id=continue]')
+    email_submit:click()
+    assert(splash:wait(3))
+    local password_input = splash:select('input[name=password]')   
+    password_input:send_text("Pakistan2212")
+    assert(splash:wait(1))
+    local password_submit = splash:select('input[id=signInSubmit]')
+    password_submit:click()
+    assert(splash:wait(3))
+    return {
+        html=splash:html(),
+        url = splash:url(),
+        png = splash:png(),
+        cookies = splash:get_cookies(),
+        }
+    end
+"""
+
 class HeadlessBrowserLoginSpider(scrapy.Spider):
     name = "amazon_login"
 
@@ -19,6 +48,15 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
                 },
             )
     
-    def start_scraping():
-        pass
+    def start_scrapping(self,response):
+        imgdata = base64.b64decode(response.data['png'])
+        filename = 'after_login.png'
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+
+        cookies_dict = {cookie['name']: cookie['value'] for cookie in response.data['cookies']}
+        url_list = ['https://www.amazon.com/']
+        for url in url_list:
+            yield scrapy.Request(url=url, cookies=cookies_dict, callback=self.parse)
+
 
