@@ -16,9 +16,9 @@ NEWSPIDER_MODULE = 'AmazonTutorial.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'AmazonTutorial (+http://www.yourdomain.com)'
 # USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-
+ 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 
 # PROXY_POOL_ENABLED = True
@@ -56,7 +56,22 @@ ROBOTSTXT_OBEY = True
 #DOWNLOADER_MIDDLEWARES = {
 #    'AmazonTutorial.middlewares.AmazontutorialDownloaderMiddleware': 543,
 #}
+
+# SPLASH_SETUP
+SPLASH_URL = 'http://localhost:8050'
+
+
+
+
+
+
+
 DOWNLOADER_MIDDLEWARES = {
+
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
 
@@ -64,6 +79,14 @@ DOWNLOADER_MIDDLEWARES = {
     # 'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
 }
 
+
+SPIDER_MIDDLEWARES = {
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
+
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
