@@ -120,18 +120,19 @@ import base64
 
 lua_script = """
 function main(splash, args)
+    print ("OKEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
     splash:init_cookies(splash.args.cookies)
     assert(splash:go(args.url))
     assert(splash:wait(1))
     splash:set_viewport_full()
     local email_input = splash:select('input[name=userId]')   
-    email_input:send_text("03316442212")
+    email_input:send_text("shahmirkhan519@gmail.com")
     assert(splash:wait(1))
     local email_submit = splash:select('input[id=submit_identifier]')
     email_submit:click()
     assert(splash:wait(3))
     local password_input = splash:select('input[name=password]')   
-    password_input:send_text("Pakistan2212")
+    password_input:send_text("iiui1111S")
     assert(splash:wait(1))
     local password_submit = splash:select('button[name=submit]')
     password_submit:click()
@@ -149,15 +150,18 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
     name = "matlab_login2"
 
     def start_requests(self):
-        signin_url = 'https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fmatlabcentral%2Ffileexchange%2F'        
+        signin_url = 'https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fhelp%2Fthingspeak%2Frest-api.html'
+        print("IIIIIIIIIIIIIIIII AAAAAMMMMMMMMMMMMMMMMMMMMMM HEREEEEEEEEEEEEEEEEEEEEEEEEE")        
         yield SplashRequest(
             url=signin_url, 
             callback=self.start_scrapping,
-            endpoint='execute', 
+            # endpoint='execute', 
             args={
+                'wait': 0.5,
                 'width': 1000,
                 'lua_source': lua_script,
-                'ua': "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+                'url': 'https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fhelp%2Fthingspeak%2Frest-api.html'
+                # 'ua': "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
                 },
             )
     
