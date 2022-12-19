@@ -3,8 +3,6 @@ from scrapy_splash import SplashRequest
 import base64
 
 
-
-
 lua_script = """
 function main(splash, args)
     splash:init_cookies(splash.args.cookies)
