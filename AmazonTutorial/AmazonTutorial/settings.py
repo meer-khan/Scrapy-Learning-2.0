@@ -61,8 +61,8 @@ ROBOTSTXT_OBEY = False
 #}
 
 # SPLASH_SETUP
-SPLASH_URL = 'http://192.168.59.103:8000'
-# SPLASH_URL = 'http://localhost:8050'
+# SPLASH_URL = 'http://192.168.59.103:8000'
+SPLASH_URL = 'http://localhost:8050'
 
 
 
