@@ -123,7 +123,7 @@ function main(splash, args)
     print ("OKEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
     splash:init_cookies(splash.args.cookies)
     assert(splash:go(args.url))
-    assert(splash:wait(1))
+    assert(splash:wait(5))
     splash:set_viewport_full()
     local email_input = splash:select('input[name=userId]')   
     email_input:send_text("shahmirkhan519@gmail.com")
@@ -154,7 +154,7 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
         print("IIIIIIIIIIIIIIIII AAAAAMMMMMMMMMMMMMMMMMMMMMM HEREEEEEEEEEEEEEEEEEEEEEEEEE")        
         yield SplashRequest(
             url=signin_url, 
-            callback=self.start_scrapping,
+            callback=self.parse,
             # endpoint='execute', 
             args={
                 'wait': 0.5,
@@ -166,6 +166,7 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
             )
     
     def start_scrapping(self,response):
+        print("TYPEEEEEEEEEEEEEEEEEEEEEEEEEEEE", type(response))
         imgdata = base64.b64decode(response.data['png'])
         filename = 'after_login.png'
         with open(filename, 'wb') as f:
@@ -184,6 +185,7 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
 
         # scraping all the links on the page
         page_urls = response.css('a')
+        print(page_urls)
         for page_url in page_urls:
             if(page_url.css('a::text').get() is not None):
                 try:
