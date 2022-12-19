@@ -120,9 +120,10 @@ import base64
 
 lua_script = """
 function main(splash, args)
+    print('I AM IN MAINNNNNN')
     splash:init_cookies(splash.args.cookies)
     assert(splash:go(args.url))
-    assert(splash:wait(5))
+    assert(splash:wait(1))
     splash:set_viewport_full()
     local email_input = splash:select('input[name=userId]')   
     email_input:send_text("shahmirkhan519@gmail.com")
@@ -132,7 +133,7 @@ function main(splash, args)
     assert(splash:wait(3))
     local password_input = splash:select('input[name=password]')   
     password_input:send_text("iiui1111S")
-    assert(splash:wait(5))
+    assert(splash:wait(1))
     local password_submit = splash:select('button[name=submit]')
     password_submit:click()
     assert(splash:wait(3))
@@ -153,13 +154,13 @@ class HeadlessBrowserLoginSpider(scrapy.Spider):
         print("IIIIIIIIIIIIIIIII AAAAAMMMMMMMMMMMMMMMMMMMMMM HEREEEEEEEEEEEEEEEEEEEEEEEEE")        
         yield SplashRequest(
             url=signin_url, 
-            callback=self.start_scrapping,
+            callback=self.parse,
             endpoint='execute', 
             args={
                 'wait': 0.5,
                 'width': 1000,
                 'lua_source': lua_script,
-                'url': 'https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fhelp%2Fthingspeak%2Frest-api.html'
+                # 'url': 'https://www.mathworks.com/login?uri=https%3A%2F%2Fwww.mathworks.com%2Fhelp%2Fthingspeak%2Frest-api.html'
                 # 'ua': "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
                 },
             )
