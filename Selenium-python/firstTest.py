@@ -26,4 +26,4 @@ def launchBrowser():
 #    driver = webdriver.Chrome(chrome_options=chrome_options)
 
 #    driver.get("http://www.google.com/")
-launchBrowser()
+# launchBrowser()
