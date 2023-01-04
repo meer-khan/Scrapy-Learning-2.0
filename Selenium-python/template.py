@@ -61,6 +61,8 @@ def getDatafromInnerPage(driver, urls):
         name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
         name = name.text
         repoName.append(name)
+
+        downloadLink = driver.find_element(By.CSS_SELECTOR,"a[class='btn btn-sm btn_color_blue link--download']").click()
     
     print(repoName)
 
