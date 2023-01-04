@@ -28,9 +28,51 @@ def pprint(msg):
         traceback.print_exc()
 
 
+
+
+def gettingMultipleItems():
+    texts = []
+    driver = webdriver.Chrome(executable_path="chromedriver.exe")
+    for i in range (1,2):
+        
+        driver.get(f"https://www.mathworks.com/matlabcentral/fileexchange/?page={i}&amp;sort=date_desc_updated")
+        
+        elements = driver.find_elements(By.CSS_SELECTOR, "div.card_container.explorer_view.add_long_title.add_card_bg_null.add_fixed_width a")
+        # elements = driver.find_elements(By.CSS_SELECTOR,"div.card_container div.card_body div.panel div.panel-heading h3")
+        
+        # print(elements)
+        for i in range(0,len(elements),2):
+            # texts.append(i.text)
+            texts.append(elements[i].get_attribute("href"))
+        # elements.
+    # print(texts)
+    # print(len(elements))
+    # print(len(texts))
+    # print(texts)
+
+    return driver, texts
+    # print(len(set(texts)))
+
+def getDatafromInnerPage(driver, urls):
+    repoName = []
+    for i in urls:
+        # time.sleep()
+        driver.get(i)
+        name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
+        name = name.text
+        repoName.append(name)
+    
+    print(repoName)
+
+
+
+
+
 def main():
     driver = getChromeDriver()
     driver.get("https://www.mathworks.com/matlabcentral/fileexchange/?page=1&amp;sort=date_desc_updated")
+    gettingMultipleItems()
+    
     input("Done")
     
 
