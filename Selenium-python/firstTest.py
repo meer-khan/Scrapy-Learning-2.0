@@ -15,12 +15,6 @@ from webdriver_manager.chrome import ChromeDriverManage
 # assert "No results found." not in driver.page_source
 # driver.close()
 
-# Downloading and installing chrome browser automatically if we dont want to 
-# explicitly install the chrome version
-driver = webdriver.Chrome(ChromeDriverManage().install())
-driver.get("https://www.python.org/")
-driver.maximize_window()
-print(driver.title)
 
 
 def launchBrowser():
@@ -36,7 +30,8 @@ def launchBrowser():
     # driver.close
 
 
-
+def launchBrowserWebdriver():
+    pass
 
 # def launchBrowser():
 #    chrome_options = Options()
@@ -45,4 +40,4 @@ def launchBrowser():
 #    driver = webdriver.Chrome(chrome_options=chrome_options)
 
 #    driver.get("http://www.google.com/")
-# launchBrowser()
+launchBrowser()
