@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 def DemoFindElementByID():
     driver = webdriver.Chrome(executable_path="chromedriver.exe")
@@ -49,25 +50,53 @@ def mathworksClicking():
 def gettingMultipleItems():
     texts = []
     driver = webdriver.Chrome(executable_path="chromedriver.exe")
-    for i in range (1,3):
+    for i in range (1,2):
         
         driver.get(f"https://www.mathworks.com/matlabcentral/fileexchange/?page={i}&amp;sort=date_desc_updated")
         
         elements = driver.find_elements(By.CSS_SELECTOR, "div.card_container.explorer_view.add_long_title.add_card_bg_null.add_fixed_width a")
         # elements = driver.find_elements(By.CSS_SELECTOR,"div.card_container div.card_body div.panel div.panel-heading h3")
-        for i in elements:
+        
+        # print(elements)
+        for i in range(0,len(elements),2):
             # texts.append(i.text)
-            texts.append(i.get_attribute("href"))
+            texts.append(elements[i].get_attribute("href"))
         # elements.
     # print(texts)
     print(len(elements))
     print(len(texts))
-    print(texts)
-    print(len(set(texts)))
+    # print(texts)
+
+    return driver, texts
+    # print(len(set(texts)))
+
+def getDatafromInnerPage(driver, urls):
+    repoName = []
+    for i in urls:
+        driver.get(i)
+        name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
+        name = name.text
+        repoName.append(name)
+    
+    print(repoName)
+
+def demoJS():
+    options = Options()
+
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    driver = webdriver.Chrome(executable_path="chromedriver.exe",chrome_options=options)
+    driver.execute_script("window.open('https://www.mathworks.com/matlabcentral/fileexchange/?page=1&amp;sort=date_desc_updated', '_self')")
+    demo_element = driver.execute_script("return document.getElementsByTagName('p')[1]")
+    driver.execute_script("arguments[0].click()",demo_element)
+    print(demo_element.text)
+    time.sleep(10)
 
 
-gettingMultipleItems()
 
+driver, urls = gettingMultipleItems()
+getDatafromInnerPage(driver,urls)
+
+# demoJS()
 
 
 
