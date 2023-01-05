@@ -63,17 +63,32 @@ def getDatafromInnerPage(driver, urls):
         repoName.append(name)
 
         downloadLink = driver.find_element(By.CSS_SELECTOR,"a[class='btn btn-sm btn_color_blue link--download']").click()
-    
+
     print(repoName)
 
 
 
 
 
+# https://www.mathworks.com/matlabcentral/fileexchange/101475-peirce-s-criterion-for-outlier-removal
+
+
+def singleRepoTesting(driver):
+    driver.get("https://www.mathworks.com/matlabcentral/fileexchange/101475-peirce-s-criterion-for-outlier-removal")
+    name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
+    name = name.text
+    # repoName.append(name)
+    print(name)
+    # downloadLink = driver.find_element(By.CSS_SELECTOR,"a[class='btn btn-sm btn_color_blue link--download']").click()
+    
+    linkfile =driver.find_element(By.LINK_TEXT,"Download").click()
+    print(name, linkfile)
+
+
 def main():
     driver = getChromeDriver()
     driver.get("https://www.mathworks.com/matlabcentral/fileexchange/?page=1&amp;sort=date_desc_updated")
-    gettingMultipleItems()
+    singleRepoTesting(driver)
     
     input("Done")
     
