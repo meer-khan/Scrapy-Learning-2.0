@@ -74,15 +74,21 @@ def getDatafromInnerPage(driver, urls):
 
 
 def singleRepoTesting(driver):
-    driver.get("https://www.mathworks.com/matlabcentral/fileexchange/101475-peirce-s-criterion-for-outlier-removal")
+    driver.get("https://www.mathworks.com/matlabcentral/fileexchange/122167-nested_pie")
     name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
+    
     name = name.text
     # repoName.append(name)
     print(name)
     # downloadLink = driver.find_element(By.CSS_SELECTOR,"a[class='btn btn-sm btn_color_blue link--download']").click()
-    
-    linkfile =driver.find_element(By.LINK_TEXT,"Download").click()
-    print(name, linkfile)
+    try:
+        # link = driver.find_element("a[class='btn btn-sm btn_color_blue link--download']::attr(href)")
+        link = driver.find_element(By.CSS_SELECTOR,"a.btn.btn-sm.btn_color_blue.link--download")
+        driver.get(link.get_attribute("href"))
+        # linkfile = driver.find_element(By.LINK_TEXT,"Download").click()
+        print(name, link)
+    except: 
+        print("not downloaded")
 
 
 def main():
@@ -118,10 +124,12 @@ def sendkeys(driver, xpath, keys, js=False):
 
 def getChromeDriver(proxy=None):
     options = webdriver.ChromeOptions()
+    # print(debug)
     if debug:
         # print("Connecting existing Chrome for debugging...")
         options.debugger_address = "127.0.0.1:9222"
-    else:
+    else:  
+        options.add_experimental_option("prefs", {"download.default_directory": "D:\CVtoPUSH\CVAfterMVPFeatures\CrawlerTesting\ETemp" })
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         options.add_experimental_option('useAutomationExtension', False)
