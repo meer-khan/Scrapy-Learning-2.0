@@ -69,26 +69,36 @@ def getDatafromInnerPage(driver, urls):
 
 
 
-
-# https://www.mathworks.com/matlabcentral/fileexchange/101475-peirce-s-criterion-for-outlier-removal
-
+# https://www.mathworks.com/matlabcentral/fileexchange/37976-numerical-computing-with-matlab
 
 def singleRepoTesting(driver):
-    driver.get("https://www.mathworks.com/matlabcentral/fileexchange/122167-nested_pie")
-    name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
-    
-    name = name.text
-    # repoName.append(name)
-    print(name)
-    # downloadLink = driver.find_element(By.CSS_SELECTOR,"a[class='btn btn-sm btn_color_blue link--download']").click()
-    try:
-        # link = driver.find_element("a[class='btn btn-sm btn_color_blue link--download']::attr(href)")
-        link = driver.find_element(By.CSS_SELECTOR,"a.btn.btn-sm.btn_color_blue.link--download")
-        driver.get(link.get_attribute("href"))
-        # linkfile = driver.find_element(By.LINK_TEXT,"Download").click()
-        print(name, link)
-    except: 
-        print("not downloaded")
+    urls = ["https://www.mathworks.com/matlabcentral/fileexchange/37976-numerical-computing-with-matlab", "https://www.mathworks.com/matlabcentral/fileexchange/122167-nested_pie"]
+
+    for i in urls:
+        driver.get(i)
+        name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
+        
+        name = name.text
+        # repoName.append(name)
+        print(name)
+        # # downloadLink = driver.find_element(By.CSS_SELECTOR,"a[class='btn btn-sm btn_color_blue link--download']").click()
+        # try:
+        #     # link = driver.find_element("a[class='btn btn-sm btn_color_blue link--download']::attr(href)")
+        #     link = driver.find_element(By.CSS_SELECTOR,"a.btn.btn-sm.btn_color_blue.link--download")
+        #     driver.get(link.get_attribute("href"))
+        #     # linkfile = driver.find_element(By.LINK_TEXT,"Download").click()
+        #     print(name, link)
+        # except: 
+        #     print("not downloaded")
+
+        try: 
+            ziptag = driver.find_elemt(By.CSS_SELECTOR, "ul.dropdown-menu.dropdown-menuright li a")
+            driver.get(ziptag.get_attribute("href"))
+            print("UL FILE DOWNLOADED")
+        except:
+            link = driver.find_element(By.CSS_SELECTOR,"a.btn.btn-sm.btn_color_blue.link--download")
+            driver.get(link.get_attribute("href"))
+            print("WITHOUT UL DOWNLOADED")
 
 
 def main():
