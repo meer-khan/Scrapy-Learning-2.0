@@ -73,14 +73,14 @@ def getDatafromInnerPage(driver, urls):
 
 def singleRepoTesting(driver):
     # li a[title='Download Zip']
-    # urls = ["https://www.mathworks.com/matlabcentral/fileexchange/47982-gui-layout-toolbox","https://www.mathworks.com/matlabcentral/fileexchange/37976-numerical-computing-with-matlab", "https://www.mathworks.com/matlabcentral/fileexchange/122167-nested_pie"]
-    driver.get("https://www.mathworks.com/matlabcentral/fileexchange/47982-gui-layout-toolbox")
-    ziptag = driver.find_element(By.CSS_SELECTOR, "ul.dropdown-menu.dropdown-menu-right li a")
-    print(ziptag)
-    link = ziptag.get_attribute("href")
-    print(link)
-    driver.get(link)
-    urls = []
+    urls = ["https://www.mathworks.com/matlabcentral/fileexchange/47982-gui-layout-toolbox","https://www.mathworks.com/matlabcentral/fileexchange/37976-numerical-computing-with-matlab", "https://www.mathworks.com/matlabcentral/fileexchange/122167-nested_pie"]
+    # driver.get("https://www.mathworks.com/matlabcentral/fileexchange/47982-gui-layout-toolbox")
+    # ziptag = driver.find_element(By.CSS_SELECTOR, "a[title='Download Zip']")
+    # print(ziptag)
+    # link = ziptag.get_attribute("href")
+    # print(link)
+    # driver.get(link)
+    # urls = []
     for i in urls:
         driver.get(i)
         name = driver.find_element(By.CSS_SELECTOR, "h2[class='add_font_color_emphasize add_margin_5'] span")
@@ -99,7 +99,8 @@ def singleRepoTesting(driver):
         #     print("not downloaded")
 
         try: 
-            ziptag = driver.find_element(By.CSS_SELECTOR, "ul.dropdown-menu.dropdown-menu-right li a[title='Download Zip']")
+            # ziptag = driver.find_element(By.CSS_SELECTOR, "ul.dropdown-menu.dropdown-menu-right li a[title='Download Zip']")
+            ziptag = driver.find_element(By.CSS_SELECTOR, "a[title='Download Zip']")
             print(ziptag)
             driver.get(ziptag.get_attribute("href"))
             print("UL FILE DOWNLOADED")
